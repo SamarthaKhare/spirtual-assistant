@@ -7,7 +7,7 @@ google-apitools==0.5.31
 google-auth==2.34.0
 google-auth-httplib2==0.2.0
 google-cloud==0.34.0
-google-cloud-aiplatform==1.81.0
+google-cloud-aiplatform>=1.70.0
 uvicorn==0.34.0
 vertexai==1.71.1
 urllib3==2.2.2
@@ -25,5 +25,3 @@ jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
 google-generativeai==0.8.4
 google-cloud-language==2.16.0
-
-
