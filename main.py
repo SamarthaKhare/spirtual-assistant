@@ -1,9 +1,10 @@
+import vertexai
+from vertexai.preview import rag
+from vertexai.preview.generative_models import GenerativeModel,GenerationConfig
+from google.cloud import storage
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import json
-import vertexai
-from vertexai import rag
-from vertexai.generative_models import GenerativeModel,GenerationConfig
 import os
 from fastapi.middleware.cors import CORSMiddleware
 from sys_pr import response_schema,system_prompt
