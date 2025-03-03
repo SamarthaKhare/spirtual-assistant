@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sys_pr import response_schema,system_prompt
 
 app = FastAPI()
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'secret.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/etc/secrets/keys"
 PROJECT_ID = "zif5x-437508"
 FILE_PATH="https://drive.google.com/file/d/1foSCX4VkNneL-b23nXik4bTNXoEobTOQ"
 DISPLAY_NAME = "trial_corpus"
