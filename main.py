@@ -91,11 +91,24 @@ def generate_response(question: str):
             f.write("\n")  
         print('error detected')
         return {}
+        
+import logging
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+logging.basicConfig(level=logging.DEBUG)
 
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logging.error(f"Unhandled error: {exc}")
+    return JSONResponse(
+        status_code=500,
+        content={"error": "Internal Server Error", "details": str(exc)}
+    )
 
 @app.post("/chat")
 def chat(request: ChatRequest):
     response = generate_response(request.query)
+    
     if response:
         return {"answer": response}
     else:
