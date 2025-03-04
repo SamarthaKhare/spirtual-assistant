@@ -106,14 +106,19 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 @app.post("/chat")
-def chat(request: ChatRequest):
-    response = generate_response(request.query)
+async def chat(request: ChatRequest):
+    try:
+        logging.info(f"Received request: {request}")
+        response = generate_response(request.query)
+        
+        if response:
+            return {"answer": response}
+        else:
+            raise HTTPException(status_code=500, detail="Error generating response")
     
-    if response:
-        return {"answer": response}
-    else:
-        raise HTTPException(status_code=500, detail="Error generating response")
-
+    except Exception as e:
+        logging.error(f"Internal Server Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 # Run the server (for local testing)
 if __name__ == "__main__":
     import uvicorn
