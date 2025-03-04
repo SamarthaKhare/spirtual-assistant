@@ -48,17 +48,13 @@ def generate_response(question: str):
             )
             rag.import_files(corpus_name=corpus_name, paths=[FILE_PATH], transformation_config=transformation_config)
             print("JSONL file imported into RAG corpus with per-document embeddings.")
-        rag_retrieval_config = rag.RagRetrievalConfig(
-            top_k=5,
-            filter=rag.Filter(
-                vector_distance_threshold=0.5, 
-            )
-        )
+        
         # Get the relevant context from book
         retrieval_response = rag.retrieval_query(
             rag_resources=[rag.RagResource(rag_corpus=corpus_name)],
             text=question,
-            rag_retrieval_config=rag_retrieval_config,
+            similarity_top_k=10,
+            vector_distance_threshold=0.5
         )
         #retrived contexts
         context=retrieval_response.contexts.contexts
